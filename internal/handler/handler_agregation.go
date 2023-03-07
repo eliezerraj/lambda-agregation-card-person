@@ -2,10 +2,10 @@ package handler
 
 import(
 
-	//"encoding/json"
+	"encoding/json"
 
 	"github.com/rs/zerolog/log"
-	//"github.com/lambda-card/internal/core/domain"
+	"github.com/lambda-agregation-card-person/internal/core/domain"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go/aws"
@@ -51,5 +51,68 @@ func (h *AgregationHandler) GetVersion(version string) (*events.APIGatewayProxyR
 		return ApiHandlerResponse(http.StatusInternalServerError, ErrorBody{aws.String(err.Error())})
 	}
 
+	return handlerResponse, nil
+}
+
+func (h *AgregationHandler) AddAgregation(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	childLogger.Debug().Msg("AddAgregation")
+
+    var agregation domain.AgregationCardPerson
+    if err := json.Unmarshal([]byte(req.Body), &agregation); err != nil {
+        return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
+    }
+
+	response, err := h.agregationService.AddAgregation(agregation)
+	if err != nil {
+		return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
+	}
+
+	handlerResponse, err := ApiHandlerResponse(http.StatusOK, response)
+	if err != nil {
+		return ApiHandlerResponse(http.StatusInternalServerError, ErrorBody{aws.String(err.Error())})
+	}
+	return handlerResponse, nil
+}
+
+func (h *AgregationHandler) SetAgregationStatus(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	childLogger.Debug().Msg("SetAgregationStatus")
+
+    var agregation domain.AgregationCardPerson
+    if err := json.Unmarshal([]byte(req.Body), &agregation); err != nil {
+        return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
+    }
+
+	response, err := h.agregationService.AddAgregation(agregation)
+	if err != nil {
+		return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
+	}
+
+	handlerResponse, err := ApiHandlerResponse(http.StatusOK, response)
+	if err != nil {
+		return ApiHandlerResponse(http.StatusInternalServerError, ErrorBody{aws.String(err.Error())})
+	}
+	return handlerResponse, nil
+}
+
+func (h *AgregationHandler) GetAgregation(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	childLogger.Debug().Msg("GetAgregation")
+
+	id := req.PathParameters["id"]
+	sk := req.PathParameters["sk"]
+	if len(id) == 0 {
+		return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(erro.ErrQueryEmpty.Error())})
+	}
+
+ 	agregation := domain.NewAgregationCardPerson(id,sk,"","","","","TENANT-001")
+
+	response, err := h.agregationService.GetAgregation(*agregation)
+	if err != nil {
+		return ApiHandlerResponse(http.StatusNotFound, ErrorBody{aws.String(err.Error())})
+	}
+
+	handlerResponse, err := ApiHandlerResponse(http.StatusOK, response)
+	if err != nil {
+		return ApiHandlerResponse(http.StatusInternalServerError, ErrorBody{aws.String(err.Error())})
+	}
 	return handlerResponse, nil
 }

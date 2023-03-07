@@ -15,10 +15,10 @@ func (r *AgregationRepository) Ping() (bool, error){
 	return true, nil
 }
 
-func (r *AgregationRepository) AddAgregation(card domain.AgregationCardPerson) (*domain.AgregationCardPerson, error){
+func (r *AgregationRepository) AddAgregation(agregation domain.AgregationCardPerson) (*domain.AgregationCardPerson, error){
 	childLogger.Debug().Msg("AddAgregation")
 
-	item, err := dynamodbattribute.MarshalMap(card)
+	item, err := dynamodbattribute.MarshalMap(agregation)
 	if err != nil {
 		childLogger.Error().Err(err).Msg("error message")
 		return nil, erro.ErrUnmarshal
@@ -42,17 +42,17 @@ func (r *AgregationRepository) AddAgregation(card domain.AgregationCardPerson) (
 		return nil, erro.ErrInsert
 	}
 
-	return &card ,nil
+	return &agregation ,nil
 }
 
-func (r *AgregationRepository) GetAgregation(card domain.AgregationCardPerson) (*domain.AgregationCardPerson, error){
+func (r *AgregationRepository) GetAgregation(agregation domain.AgregationCardPerson) (*domain.AgregationCardPerson, error){
 	childLogger.Debug().Msg("GetAgregation")
 
 	var keyCond expression.KeyConditionBuilder
 
 	keyCond = expression.KeyAnd(
-		expression.Key("id").Equal(expression.Value(card.ID)),
-		expression.Key("sk").BeginsWith(card.SK),
+		expression.Key("id").Equal(expression.Value(agregation.ID)),
+		expression.Key("sk").BeginsWith(agregation.SK),
 	)
 
 	expr, err := expression.NewBuilder().

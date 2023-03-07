@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/aws/aws-lambda-go v1.38.0
 	github.com/aws/aws-sdk-go v1.44.215
+	github.com/google/go-cmp v0.5.9
 	github.com/rs/zerolog v1.29.0
 )
 

@@ -16,7 +16,7 @@ import (
 
 var (
 	logLevel		=	zerolog.DebugLevel // InfoLevel DebugLevel
-	tableName		=	"person_card"
+	tableName		=	"agregation_card_person"
 	version			=	"lambda-aggregation_person_card (github) version 1.0"
 	eventSource		=	"lambda-card"
 	eventBusName	=	"event-bus-card"	
@@ -80,18 +80,18 @@ func lambdaHandler(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyRe
 
 	switch req.HTTPMethod {
 		case "GET":
-			if (req.Resource == "/card/{id}"){
-			//	response, _ = cardHandler.GetCard(req)
+			if (req.Resource == "/agregation/{id}/{sk}"){
+				response, _ = agregationHandler.GetAgregation(req)
 			}else if (req.Resource == "/version"){
 				response, _ = agregationHandler.GetVersion(version)
 			}else {
 				response, _ = agregationHandler.UnhandledMethod()
 			}
 		case "POST":
-			if (req.Resource == "/card"){
-				//response, _ = cardHandler.AddCard(req)
-			}else if (req.Resource == "/card/status") {
-				//response, _ = cardHandler.SetCardStatus(req)
+			if (req.Resource == "/agregation"){
+				response, _ = agregationHandler.AddAgregation(req)
+			}else if (req.Resource == "/agregation/status") {
+				response, _ = agregationHandler.SetAgregationStatus(req)
 			}else {
 				response, _ = agregationHandler.UnhandledMethod()
 			}
