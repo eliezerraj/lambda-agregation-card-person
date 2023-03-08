@@ -6,7 +6,8 @@ Parameters:
     Type: String ##lambda-agregation-card-person/main.zip
     Default: lambda-agregation-card-person/main.zip
 
-Resources: 
+Resources:
+
   LambdaExecutionRole:
     Type: AWS::IAM::Role
     Properties:
@@ -36,7 +37,7 @@ Resources:
             - "logs:PutLogEvents"
             Resource: "*"
 
-  ListBucketsS3Lambda: 
+  LambdaFunction: 
     Type: "AWS::Lambda::Function"
     Properties: 
       Handler: "main"
@@ -48,4 +49,14 @@ Resources:
       Code: 
         S3Bucket: !Ref S3BucketParam
         S3Key: !Ref S3KeyParam
-        
+    version:
+      Type: AWS::Lambda::Version
+      Properties:
+        FunctionName: !Ref LambdaFunction
+        Description: version Live
+    alias:
+      Type: AWS::Lambda::Alias
+      Properties:
+        FunctionName: !Ref LambdaFunction
+        FunctionVersion: !GetAtt version.Version
+        Name: LIVE    

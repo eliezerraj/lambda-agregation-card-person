@@ -1,0 +1,6 @@
+{
+    "Parameters":{
+        "S3BucketParam": "account-a-884069944685-codedeploy-artfacts",
+        "S3KeyParam": "lambda-agregation-ca/main.zip"
+    }
+}
