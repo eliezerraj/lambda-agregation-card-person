@@ -1,10 +1,10 @@
 Parameters:
   S3BucketParam:
     Type: String ##account-a-884069944685-codedeploy-artfacts
-     Default: account-a-884069944685-codedeploy-artfacts
+    Default: account-a-884069944685-codedeploy-artfacts
   S3KeyParam:
     Type: String ##lambda-agregation-card-person/main.zip
-     Default: lambda-agregation-card-person/main.zip
+    Default: lambda-agregation-card-person/main.zip
 
 Resources: 
   LambdaExecutionRole:
