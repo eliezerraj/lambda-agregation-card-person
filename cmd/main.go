@@ -18,7 +18,7 @@ import (
 var (
 	logLevel		=	zerolog.DebugLevel // InfoLevel DebugLevel
 	tableName		=	"agregation_card_person"
-	version			=	"lambda-aggregation_person_card (github) version 1.1"
+	version			=	"lambda-aggregation_person_card (github) version 1.3"
 	eventSource		=	"lambda-card"
 	eventBusName	=	"event-bus-card"	
 	response				*events.APIGatewayProxyResponse
@@ -79,10 +79,10 @@ func main(){
 
 func lambdaHandler(req events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	log.Debug().Msg("handler")
-	log.Debug().Msg("-------------------")
+	log.Debug().Msg("**************************")
 	log.Debug().Str("req.Body", req.Body).
 				Msg("APIGateway Request.Body")
-	log.Debug().Msg("--------------------")
+	log.Debug().Msg("-*******************")
 
 	switch req.HTTPMethod {
 		case "GET":
