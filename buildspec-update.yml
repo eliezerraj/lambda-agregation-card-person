@@ -2,7 +2,7 @@ version: 0.2
 
 env:
   variables:
-    FUNCTION_NAME: m
+    FUNCTION_NAME: lambda-agregation-card-person
     ALIAS_NAME: LIVE
     BUCKET_NAME: account-a-884069944685-artifacts
     CODEDEPLOY_APPLICATION_NAME: lambda-agregation-card-person-deploy
