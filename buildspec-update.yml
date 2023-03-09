@@ -5,7 +5,7 @@ env:
     FUNCTION_NAME: lambda-agregation-card-person
     ALIAS_NAME: LIVE
     BUCKET_NAME: account-a-884069944685-artifacts
-    BUCKET_FOLDER_NAME: lambda-agregation-ca
+    BUCKET_FOLDER_NAME: lambda-agregation-card-person
     CODEDEPLOY_APPLICATION_NAME: lambda-agregation-card-person-deploy
     CODEDEPLOY_APPLICATION_GROUP: lambda-agregation-card-person-deploy-group
     REGION_DEPLOYMENT: us-east-2
