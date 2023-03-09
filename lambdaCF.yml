@@ -50,14 +50,14 @@ Resources:
       Code: 
         S3Bucket: !Ref S3BucketParam
         S3Key: !Ref S3KeyParam
-    version:
-      Type: AWS::Lambda::Version
-      Properties:
-        FunctionName: !Ref LambdaFunction
-        Description: version Live
-    alias:
-      Type: AWS::Lambda::Alias
-      Properties:
-        FunctionName: !Ref LambdaFunction
-        FunctionVersion: !GetAtt version.Version
-        Name: LIVE    
+  VersionLambda:
+    Type: AWS::Lambda::Version
+    Properties:
+      FunctionName: !Ref LambdaFunction
+      Description: version Live
+  AliasLambda:
+    Type: AWS::Lambda::Alias
+    Properties:
+      FunctionName: !Ref LambdaFunction
+      FunctionVersion: !GetAtt VersionLambda.Version
+      Name: LIVE    
