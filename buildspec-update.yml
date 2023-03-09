@@ -14,7 +14,13 @@ phases:
   pre_build: 
     commands: 
       - echo PRE_BUILD (show enviroment variables) ...
-      - env
+      - echo $FUNCTION_NAME
+      - echo $BUCKET_NAME
+      - echo $MY_ENV_VAR
+      - echo $BUCKET_FOLDER_NAME
+      - echo $CODEDEPLOY_APPLICATION_NAME
+      - echo $CODEDEPLOY_APPLICATION_GROUP
+      - echo $east
 
   build: 
     commands: 
