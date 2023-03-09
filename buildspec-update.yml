@@ -13,7 +13,8 @@ env:
 phases: 
   pre_build: 
     commands: 
-      - echo PRE_BUILD no tasks... 
+      - echo PRE_BUILD (show enviroment variables) ...
+      - env
 
   build: 
     commands: 
