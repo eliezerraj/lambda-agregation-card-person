@@ -13,7 +13,7 @@ env:
 phases: 
   pre_build: 
     commands: 
-      - echo PRE_BUILD (show enviroment variables) ...
+      - echo PRE_BUILD show enviroment variables ...
       - echo $FUNCTION_NAME
       - echo $BUCKET_NAME
       - echo $MY_ENV_VAR
