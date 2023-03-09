@@ -8,9 +8,10 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 
+	"github.com/lambda-agregation-card-person/internal/adapter/notification"
 	"github.com/lambda-agregation-card-person/internal/repository"
 	"github.com/lambda-agregation-card-person/internal/service"
-	"github.com/lambda-agregation-card-person/internal/handler"
+	"github.com/lambda-agregation-card-person/internal/adapter/handler"
 
 )
 
@@ -20,10 +21,11 @@ var (
 	version			=	"lambda-aggregation_person_card (github) version 1.0"
 	eventSource		=	"lambda-card"
 	eventBusName	=	"event-bus-card"	
-	response			*events.APIGatewayProxyResponse
+	response				*events.APIGatewayProxyResponse
 	agregationHandler		*handler.AgregationHandler
 	agregationRepository	*repository.AgregationRepository
 	agregationService		*service.AgregationService
+	agregationNotification 	*notification.AgregationNotification
 )
 
 func getEnv(){
@@ -65,6 +67,10 @@ func main(){
 		return
 	}
 
+	agregationNotification, err = notification.NewAgregationNotification(eventSource, eventBusName)
+	if err != nil{
+		return
+	}
 	agregationService 	= service.NewAgregationService(*agregationRepository)
 	agregationHandler 	= handler.NewAgregationHandler(*agregationService)
 

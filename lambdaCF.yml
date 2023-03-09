@@ -5,6 +5,12 @@ Parameters:
   S3KeyParam:
     Type: String 
     Default: lambda-agregation-card-person/main.zip
+  ManagedPolicyParameterOne:
+    Type: String 
+    Default: arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+  ManagedPolicyParameterTwo:
+    Type: String 
+    Default: arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess
 
 Resources:
 
@@ -21,8 +27,11 @@ Resources:
           Action:
           - sts:AssumeRole
       Path: "/"
+      ManagedPolicyArns: 
+        - !Ref ManagedPolicyParameterOne
+        - !Ref ManagedPolicyParameterTwo
       Policies:
-      - PolicyName: root
+      - PolicyName: lambda_policy
         PolicyDocument:
           Version: '2012-10-17'
           Statement:
@@ -34,6 +43,7 @@ Resources:
             Action:
             - "logs:CreateLogGroup"
             - "logs:CreateLogStream"
+            - "logs:PutLogEvents"
             - "logs:PutLogEvents"
             Resource: "*"
 
