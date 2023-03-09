@@ -18,7 +18,7 @@ import (
 var (
 	logLevel		=	zerolog.DebugLevel // InfoLevel DebugLevel
 	tableName		=	"agregation_card_person"
-	version			=	"lambda-aggregation_person_card (github) version 1.0"
+	version			=	"lambda-aggregation_person_card (github) version 1.1"
 	eventSource		=	"lambda-card"
 	eventBusName	=	"event-bus-card"	
 	response				*events.APIGatewayProxyResponse
