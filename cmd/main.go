@@ -18,7 +18,7 @@ import (
 var (
 	logLevel		=	zerolog.DebugLevel // InfoLevel DebugLevel
 	tableName		=	"agregation_card_person"
-	version			=	"lambda-aggregation_person_card (github) version 1.3"
+	version			=	"lambda-aggregation_person_card (github) version 1.4"
 	eventSource		=	"lambda-card"
 	eventBusName	=	"event-bus-card"	
 	response				*events.APIGatewayProxyResponse
@@ -55,7 +55,7 @@ func init(){
 }
 
 func main(){
-	log.Debug().Msg("main lambda-aggregation_person_card (go) v 2.0")
+	log.Debug().Msg("main lambda-aggregation_person_card (go) v 1.4")
 	log.Debug().Msg("-------------------")
 	log.Debug().Str("version", version).
 				Str("tableName", tableName).
