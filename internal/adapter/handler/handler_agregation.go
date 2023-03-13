@@ -1,7 +1,7 @@
 package handler
 
 import(
-
+	"time"
 	"encoding/json"
 
 	"github.com/rs/zerolog/log"
@@ -62,6 +62,7 @@ func (h *AgregationHandler) AddAgregation(req events.APIGatewayProxyRequest) (*e
         return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
     }
 
+	agregation.CreateAt = time.Now()
 	response, err := h.agregationService.AddAgregation(agregation)
 	if err != nil {
 		return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
@@ -103,7 +104,7 @@ func (h *AgregationHandler) GetAgregation(req events.APIGatewayProxyRequest) (*e
 		return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(erro.ErrQueryEmpty.Error())})
 	}
 
- 	agregation := domain.NewAgregationCardPerson(id,sk,"","","","","TENANT-001")
+ 	agregation := domain.NewAgregationCardPerson(id,sk,"","","",time.Now(),"TENANT-001")
 
 	response, err := h.agregationService.GetAgregation(*agregation)
 	if err != nil {

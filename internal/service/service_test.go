@@ -2,6 +2,7 @@ package service
 
 import(
 	"testing"
+	"time"
 	"github.com/rs/zerolog"
 	"github.com/google/go-cmp/cmp"
 
@@ -18,7 +19,7 @@ var (
 											"4444.000.000.001",
 											"PERSON-01",
 											"ACTIVE",
-											"02/26",
+											time.Now(),
 											"TENANT-001")
 							
 )

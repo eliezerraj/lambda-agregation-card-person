@@ -1,21 +1,26 @@
 package domain
 
+import (
+	"time"
+
+)
+
 type AgregationCardPerson struct {
 	ID				string	`json:"id,omitempty"`
 	SK				string	`json:"sk,omitempty"`
 	CardNumber		string  `json:"card_number,omitempty"`
 	Person			string  `json:"person,omitempty"`
 	Status			string  `json:"status,omitempty"`
-	Valid			string  `json:"valid,omitempty"`
+	CreateAt	 time.Time 	`json:"create_at,omitempty"`
 	Tenant			string  `json:"tenant_id,omitempty"`
 }
 
 func NewAgregationCardPerson(id string, 
-			sk string, 
-			cardnumber string, 
-			person string,
-			status	string,
-			valid	string,
+			sk 			string, 
+			cardnumber 	string, 
+			person 		string,
+			status		string,
+			createAt	time.Time,
 			tenant	string) *AgregationCardPerson{
 	return &AgregationCardPerson{
 		ID:	id,
@@ -23,7 +28,7 @@ func NewAgregationCardPerson(id string,
 		CardNumber: cardnumber,
 		Person: person,
 		Status: status,
-		Valid: valid,
+		CreateAt: createAt, 
 		Tenant: tenant,
 	}
 }
