@@ -15,7 +15,7 @@ import(
 
 )
 
-var childLogger = log.With().Str("handler", "CardHandler").Logger()
+var childLogger = log.With().Str("handler", "AgregationService").Logger()
 
 var transactionSuccess	= "Transação com sucesso"
 

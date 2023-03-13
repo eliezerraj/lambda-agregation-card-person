@@ -14,7 +14,7 @@ import (
 
 )
 
-var childLogger = log.With().Str("notification", "eventBridge").Logger()
+var childLogger = log.With().Str("notification", "NotificationAgregation").Logger()
 
 type AgregationNotification struct {
 	client			*eventbridge.EventBridge
