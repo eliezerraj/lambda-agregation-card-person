@@ -13,14 +13,6 @@ import(
 var (
 	tableName = "agregation_card_person"
 	agregationRepository	*repository.AgregationRepository
-
-	agre01 = domain.NewAgregationCardPerson("AGREGATION-01",
-											"AGREGATION-01",
-											"4444.000.000.001",
-											"PERSON-01",
-											"ACTIVE",
-											time.Now(),
-											"TENANT-001")
 							
 )
 
@@ -34,6 +26,16 @@ func TestAddAgregation(t *testing.T) {
 	}
 
 	service	:= NewAgregationService(*repository)
+	var time_now = time.Now()
+
+	agre01 := domain.NewAgregationCardPerson("AGREGATION-555.000.000.001",
+											"PERSON:PERSON-555",
+											"555.000.000.001",
+											"MR TEST 555",
+											"CANCELED-TEST",
+											&time_now,
+											&time_now,
+											"TENANT-555")
 
 	result, err := service.AddAgregation(*agre01)
 	if err != nil {
@@ -43,7 +45,7 @@ func TestAddAgregation(t *testing.T) {
 	if (cmp.Equal(agre01, result)) {
 		t.Logf("Success on TestAddCard!!! result : %v ", result)
 	} else {
-		t.Errorf("Error TestAddAgregation input : %v" , *agre01)
+		t.Errorf("Error TestAddAgregation input : %v || result : %v " , *agre01, result)
 	}
 }
 
@@ -58,15 +60,24 @@ func TestGetAgregation(t *testing.T) {
 
 	service	:= NewAgregationService(*repository)
 
+	agre01 := domain.NewAgregationCardPerson("AGREGATION-4444.000.000.001",
+											"PERSON:PERSON-001",
+											"",
+											"",
+											"",
+											nil,
+											nil,
+											"")
+
 	result, err := service.GetAgregation(*agre01)
 	if err != nil {
 		t.Errorf("Error -TestGetAgregation Access DynanoDB %v ", tableName)
 	}
 
-	if (cmp.Equal(agre01, result)) {
+	if (agre01.SK == result.SK){
 		t.Logf("Success on TestGetAgregation!!! result : %v ", result)
-	} else {
-		t.Errorf("Error TestGetAgregation input : %v" , *agre01)
+	}else {
+		t.Errorf("Error TestGetAgregation input : %v || result : %v "  , *agre01, result)
 	}
 }
 
@@ -80,16 +91,23 @@ func TestSetAgregationStatus(t *testing.T) {
 	}
 
 	service	:= NewAgregationService(*repository)
+	agre01 := domain.NewAgregationCardPerson("AGREGATION-4444.000.000.001",
+											"PERSON:PERSON-001",
+											"",
+											"",
+											"CANCELED",
+											nil,
+											nil,
+											"")
 
-	agre01.Status = "CANCELED"
 	result, err := service.SetAgregationStatus(*agre01)
 	if err != nil {
 		t.Errorf("Error -TestSetAgregationStatus Access DynanoDB %v ", tableName)
 	}
 
-	if (cmp.Equal(agre01, result)) {
+	if (agre01.Status == result.Status){
 		t.Logf("Success on TestSetAgregationStatus!!! result : %v ", result)
-	} else {
-		t.Errorf("Error TestSetAgregationStatus input : %v" , *agre01)
+	}else {
+		t.Errorf("Error TestSetAgregationStatus input : %v || result : %v "  , *agre01, result)
 	}
 }

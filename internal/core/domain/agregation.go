@@ -11,7 +11,8 @@ type AgregationCardPerson struct {
 	CardNumber		string  `json:"card_number,omitempty"`
 	Person			string  `json:"person,omitempty"`
 	Status			string  `json:"status,omitempty"`
-	CreateAt	 time.Time 	`json:"create_at,omitempty"`
+	CreateAt	*time.Time 	`json:"create_at,omitempty"`
+	UpdateAt	*time.Time 	`json:"update_at,omitempty"`
 	Tenant			string  `json:"tenant_id,omitempty"`
 }
 
@@ -20,7 +21,8 @@ func NewAgregationCardPerson(id string,
 			cardnumber 	string, 
 			person 		string,
 			status		string,
-			createAt	time.Time,
+			createAt	*time.Time,
+			updateAt	*time.Time,
 			tenant	string) *AgregationCardPerson{
 	return &AgregationCardPerson{
 		ID:	id,
@@ -29,6 +31,7 @@ func NewAgregationCardPerson(id string,
 		Person: person,
 		Status: status,
 		CreateAt: createAt, 
+		UpdateAt: updateAt, 
 		Tenant: tenant,
 	}
 }
