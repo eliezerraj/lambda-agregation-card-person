@@ -62,7 +62,8 @@ func (h *AgregationHandler) AddAgregation(req events.APIGatewayProxyRequest) (*e
         return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
     }
 
-	agregation.CreateAt = time.Now()
+	time_now := time.Now()
+	agregation.CreateAt = &time_now
 	response, err := h.agregationService.AddAgregation(agregation)
 	if err != nil {
 		return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(err.Error())})
@@ -104,7 +105,15 @@ func (h *AgregationHandler) GetAgregation(req events.APIGatewayProxyRequest) (*e
 		return ApiHandlerResponse(http.StatusBadRequest, ErrorBody{aws.String(erro.ErrQueryEmpty.Error())})
 	}
 
- 	agregation := domain.NewAgregationCardPerson(id,sk,"","","",time.Now(),"TENANT-001")
+	time_nil := time.Time{}
+ 	agregation := domain.NewAgregationCardPerson(id,
+												sk,
+												"",
+												"",
+												"",
+												&time_nil,
+												&time_nil,
+												"TENANT-001")
 
 	response, err := h.agregationService.GetAgregation(*agregation)
 	if err != nil {
