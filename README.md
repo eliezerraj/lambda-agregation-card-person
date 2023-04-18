@@ -17,3 +17,7 @@ Get /agregation/AGREGATION-4444.000.000.010/PERSON:PERSON-010
 
 obs: Data agregated via lambda-agregation-card-person-worker
 //-----
+
+APIGW ==> Lambda ==> DynamoDB (agregation-card-person)
+
+//-----
